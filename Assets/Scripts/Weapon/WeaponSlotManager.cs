@@ -50,12 +50,14 @@ public class WeaponSlotManager : MonoBehaviour
 
     private void LoadRightHandDamageCollider()
     {
-        rightHandDamageCollider = rightHandSlot.GetComponentInChildren<DamageCollider>();
+        //rightHandDamageCollider = null;
+        //rightHandDamageCollider = rightHandSlot.GetComponentInChildren<DamageCollider>();
+        //Debug.Log(rightHandDamageCollider.name);
     }
 
     public void EnableRightDamageCollider()
     {
-        rightHandDamageCollider.EnableColliderDamage();
+        rightHandSlot.GetComponentInChildren<DamageCollider>().EnableColliderDamage();
     }
 
     public void EnableLeftDamageCollider()
@@ -65,7 +67,7 @@ public class WeaponSlotManager : MonoBehaviour
 
     public void DisableRightHandCollider()
     {
-        rightHandDamageCollider.DisableColliderDamage();
+        rightHandSlot.GetComponentInChildren<DamageCollider>().DisableColliderDamage();
     }
 
     public void DisableLeftHandCollider()

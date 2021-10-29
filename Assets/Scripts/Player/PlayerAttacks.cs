@@ -3,14 +3,12 @@ using UnityEngine;
 public class PlayerAttacks : MonoBehaviour
 {
     AnimatorHandler anim;
-    InputHandler input;
 
     public string lastAttack;
 
     private void Awake()
     {
         anim = GetComponentInChildren<AnimatorHandler>();
-        input = GetComponent<InputHandler>();
     }
 
     public void HandleLightAttack(WeaponItem weapon)

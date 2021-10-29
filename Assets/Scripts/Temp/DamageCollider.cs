@@ -14,12 +14,14 @@ public class DamageCollider : MonoBehaviour
 
     public void EnableColliderDamage()
     {
-        damageCollider.enabled = true;
+        if(damageCollider != null)
+            damageCollider.enabled = true;
     }
 
     public void DisableColliderDamage()
     {
-        damageCollider.enabled = false;
+        if (damageCollider != null)
+            damageCollider.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

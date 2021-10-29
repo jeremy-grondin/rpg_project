@@ -6,7 +6,6 @@ public class PlayerManager : MonoBehaviour
     PlayerLocomotion playerLocomotion;
     Animator anim;
  
-
     [HideInInspector]
     public bool isInteracting = false;
 
@@ -33,5 +32,6 @@ public class PlayerManager : MonoBehaviour
     {
         input.lightAttack = false;
         input.heavyAttack = false;
+        input.switchWeapon = false;
     }
 }

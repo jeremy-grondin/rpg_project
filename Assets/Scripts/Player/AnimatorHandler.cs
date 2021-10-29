@@ -22,7 +22,7 @@ public class AnimatorHandler : MonoBehaviour
     public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
     {
         float v = 0f;
-        float h = 0f;
+        //float h = 0f;
 
         if (verticalMovement > 0.55f)
             v = 1f;

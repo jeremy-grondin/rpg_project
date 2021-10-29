@@ -11,6 +11,7 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public bool lightAttack = false;
     [HideInInspector] public bool heavyAttack = false;
     [HideInInspector] public bool comboFlag = false;
+    [HideInInspector] public bool switchWeapon = false;
 
     PlayerActions inputActions;
     PlayerAttacks playerAttacks;
@@ -48,6 +49,7 @@ public class InputHandler : MonoBehaviour
     {
         MoveInput();
         AttackInput();
+        SwitchWeaponInput();
     }
 
     private void MoveInput()
@@ -83,5 +85,12 @@ public class InputHandler : MonoBehaviour
 
         if (heavyAttack)
             playerAttacks.HandleHeavyAttack(inventory.rightWeapon);
+    }
+
+    private void SwitchWeaponInput()
+    {
+        inputActions.PlayerControls.NextWeapon.performed += i => switchWeapon = true;
+        if(switchWeapon)
+            inventory.ChangeWeaponRightHand();
     }
 }

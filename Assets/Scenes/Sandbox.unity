@@ -189,7 +189,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69034681}
-  m_LocalRotation: {x: 0.22053836, y: -0.00939194, z: 0.0021236725, w: 0.97533077}
+  m_LocalRotation: {x: 0.22053836, y: -0.009391974, z: 0.0021236802, w: 0.97533077}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1047,7 +1047,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.22585756, y: -0.009380207, z: 0.0021748957, w: 0.9741128}
+  m_LocalRotation: {x: 0.22585757, y: -0.009380251, z: 0.002174901, w: 0.9741128}
   m_LocalPosition: {x: 0.10630189, y: 2.881791, z: -5.5190783}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1280,7 +1280,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112109947}
-  m_LocalRotation: {x: 0.23824263, y: -0.009351759, z: 0.0022941555, w: 0.97115797}
+  m_LocalRotation: {x: 0.23824263, y: -0.009351793, z: 0.0022941637, w: 0.97115797}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1536,6 +1536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInteracting: 0
+  canCombo: 0
 --- !u!114 &1527789195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1594,6 +1595,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 4162e5e6b9af3c44fae3f5063068ae79, type: 2}
   leftWeapon: {fileID: 11400000, guid: 5cbfb70a06bcfc34d89586ae8bbefad5, type: 2}
+  weaponsForRightHand:
+  - {fileID: 11400000, guid: 4162e5e6b9af3c44fae3f5063068ae79, type: 2}
+  - {fileID: 11400000, guid: a4a84571f55fce74daf2515785e72232, type: 2}
+  weaponsForLefttHand:
+  - {fileID: 11400000, guid: 5cbfb70a06bcfc34d89586ae8bbefad5, type: 2}
+  - {fileID: 11400000, guid: 5cbfb70a06bcfc34d89586ae8bbefad5, type: 2}
+  currentWeaponRightIndex: 0
+  currentWeaponLeftIndex: 0
 --- !u!114 &1527789198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1606,6 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8397f76479a7f0645ae93f5b042023ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!4 &1527789199
 Transform:
   m_ObjectHideFlags: 0
@@ -1656,6 +1666,8 @@ MonoBehaviour:
   moveAmount: 0
   lightAttack: 0
   heavyAttack: 0
+  comboFlag: 0
+  switchWeapon: 0
 --- !u!54 &1527789202
 Rigidbody:
   m_ObjectHideFlags: 0
