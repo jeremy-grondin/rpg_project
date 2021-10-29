@@ -8,9 +8,13 @@ public class WeaponItem : Item
 
     public int weaponDamage = 2;
 
-    [Header("One Handed Attack Animation")]
+    [Header("One Handed Attack Animations")]
     public string lightAttack;
     public string lightAttack2;
     public string heavyAttack;
     public string heavyAttack2;
+
+    [Header("IdleAnimations")]
+    public string rightArmIdle;
+    public string leftHandIdle;
 }
