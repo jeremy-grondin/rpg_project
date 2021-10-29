@@ -30,12 +30,9 @@ public class PlayerLocomotion : MonoBehaviour
     #region Movement
 
     Vector3 normalVector;
-    Vector3 targetPosition;
 
     public void MoveAndRotate()
     {
-        input.UpdateInput();
-
         moveDir = cameraTransform.forward * input.vertical + cameraTransform.right * input.horizontal;
         moveDir.Normalize();
         moveDir.y = 0f;

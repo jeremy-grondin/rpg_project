@@ -3,17 +3,19 @@ using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
 {
-    public float horizontal = 0f;
-    public float vertical = 0f;
-    public float mouseX = 0f;
-    public float mouseY = 0f;
-    public float moveAmount = 0f;
-    public bool lightAttack = false;
-    public bool heavyAttack = false;
+    [HideInInspector] public float horizontal = 0f;
+    [HideInInspector] public float vertical = 0f;
+    [HideInInspector] public float mouseX = 0f;
+    [HideInInspector] public float mouseY = 0f;
+    [HideInInspector] public float moveAmount = 0f;
+    [HideInInspector] public bool lightAttack = false;
+    [HideInInspector] public bool heavyAttack = false;
+    [HideInInspector] public bool comboFlag = false;
 
     PlayerActions inputActions;
     PlayerAttacks playerAttacks;
     PlayerInventory inventory;
+    PlayerManager playerManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -22,6 +24,7 @@ public class InputHandler : MonoBehaviour
     {
         playerAttacks = GetComponent<PlayerAttacks>();
         inventory = GetComponent<PlayerInventory>();
+        playerManager = GetComponent<PlayerManager>();
     }
 
     public void OnEnable()
@@ -62,7 +65,21 @@ public class InputHandler : MonoBehaviour
         inputActions.PlayerControls.HeavyAttack.performed += i => heavyAttack = true;
 
         if (lightAttack)
-            playerAttacks.HandleLightAttack(inventory.rightWeapon);
+        {
+            if(playerManager.canCombo)
+            {
+                comboFlag = true;
+                playerAttacks.Combo(inventory.rightWeapon);
+                comboFlag = false;
+            }
+            else
+            {
+                if (playerManager.canCombo || playerManager.isInteracting)
+                    return;
+
+                playerAttacks.HandleLightAttack(inventory.rightWeapon);
+            }
+        }
 
         if (heavyAttack)
             playerAttacks.HandleHeavyAttack(inventory.rightWeapon);

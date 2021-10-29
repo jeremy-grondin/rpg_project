@@ -10,5 +10,7 @@ public class WeaponItem : Item
 
     [Header("One Handed Attack Animation")]
     public string lightAttack;
+    public string lightAttack2;
     public string heavyAttack;
+    public string heavyAttack2;
 }

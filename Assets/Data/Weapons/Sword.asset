@@ -15,5 +15,8 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: Sword
   modePrefab: {fileID: 1422731549063059413, guid: a87c5074598094d45ba1c1b0f7e28e00, type: 3}
+  weaponDamage: 2
   lightAttack: LightAttack
+  lightAttack2: LightAttack2
   heavyAttack: HeavyAttack
+  heavyAttack2: 

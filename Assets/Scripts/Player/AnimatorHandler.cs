@@ -64,14 +64,24 @@ public class AnimatorHandler : MonoBehaviour
         anim.CrossFade(animName, 0.2f);
     }
 
+    public void EnableCombo()
+    {
+        anim.SetBool("CanCombo", true);
+    }
+    
+    public void DisableCombo()
+    {
+        anim.SetBool("CanCombo", false);
+    }
+
     private void OnAnimatorMove()
     {
-       /* if (!playerManager.isInteracting)
+        if (!playerManager.isInteracting)
             return;
 
         playerLocomtion.rb.drag = 0;
         Vector3 pos = anim.deltaPosition;
         pos.y = 0f;
-        playerLocomtion.rb.velocity = pos / Time.deltaTime;*/
+        playerLocomtion.rb.velocity = pos / Time.deltaTime;
     }
 }

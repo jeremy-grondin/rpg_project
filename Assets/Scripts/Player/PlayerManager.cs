@@ -10,6 +10,8 @@ public class PlayerManager : MonoBehaviour
     [HideInInspector]
     public bool isInteracting = false;
 
+    [HideInInspector] public bool canCombo = false;
+
     private void Start()
     {
         input = GetComponent<InputHandler>();
@@ -19,7 +21,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        playerLocomotion.MoveAndRotate();
+        input.UpdateInput();
+        isInteracting = anim.GetBool("IsInteracting");
+        canCombo = anim.GetBool("CanCombo");
+
+        if (!isInteracting)
+            playerLocomotion.MoveAndRotate();
     }
 
     private void LateUpdate()
