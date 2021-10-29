@@ -19,6 +19,6 @@ MonoBehaviour:
   lightAttack: LightAttack
   lightAttack2: LightAttack2
   heavyAttack: HeavyAttack
-  heavyAttack2: 
+  heavyAttack2: HeavyAttack2
   rightArmIdle: IdleWeaponRight
   leftHandIdle: IdleWeaponLeft

@@ -66,6 +66,8 @@ public class InputHandler : MonoBehaviour
         inputActions.PlayerControls.LightAttack.performed += i => lightAttack = true;
         inputActions.PlayerControls.HeavyAttack.performed += i => heavyAttack = true;
 
+
+        //TODO factoriser ces 2 if
         if (lightAttack)
         {
             if(playerManager.canCombo)
@@ -84,7 +86,21 @@ public class InputHandler : MonoBehaviour
         }
 
         if (heavyAttack)
-            playerAttacks.HandleHeavyAttack(inventory.rightWeapon);
+        {
+            if (playerManager.canCombo)
+            {
+                comboFlag = true;
+                playerAttacks.ComboHeavyAttack(inventory.rightWeapon);
+                comboFlag = false;
+            }
+            else
+            {
+                if (playerManager.canCombo || playerManager.isInteracting)
+                    return;
+
+                playerAttacks.HandleHeavyAttack(inventory.rightWeapon);
+            }
+        }
     }
 
     private void SwitchWeaponInput()

@@ -29,4 +29,11 @@ public class PlayerAttacks : MonoBehaviour
         if (lastAttack == weapon.lightAttack)
             anim.PlayAnimation(weapon.lightAttack2, true);
     }
+
+    public void ComboHeavyAttack(WeaponItem weapon)
+    {
+        anim.anim.SetBool("CanCombo", false);
+        if (lastAttack == weapon.heavyAttack)
+            anim.PlayAnimation(weapon.heavyAttack2, true);
+    }
 }
