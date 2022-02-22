@@ -2,38 +2,38 @@ using UnityEngine;
 
 public class PlayerAttacks : MonoBehaviour
 {
-    AnimatorHandler anim;
+    AnimatorHandler animHandler;
 
     public string lastAttack;
 
     private void Awake()
     {
-        anim = GetComponentInChildren<AnimatorHandler>();
+        animHandler = GetComponentInChildren<AnimatorHandler>();
     }
 
     public void HandleLightAttack(WeaponItem weapon)
     {
-        anim.PlayAnimation(weapon.lightAttack, true);
+        animHandler.PlayAnimation(weapon.lightAttack, true);
         lastAttack = weapon.lightAttack;
     }
 
     public void HandleHeavyAttack(WeaponItem weapon)
     {
-        anim.PlayAnimation(weapon.heavyAttack, true);
+        animHandler.PlayAnimation(weapon.heavyAttack, true);
         lastAttack = weapon.heavyAttack;
     }
 
     public void Combo(WeaponItem weapon)
     {
-        anim.anim.SetBool("CanCombo", false);
+        animHandler.anim.SetBool("CanCombo", false);
         if (lastAttack == weapon.lightAttack)
-            anim.PlayAnimation(weapon.lightAttack2, true);
+            animHandler.PlayAnimation(weapon.lightAttack2, true);
     }
 
     public void ComboHeavyAttack(WeaponItem weapon)
     {
-        anim.anim.SetBool("CanCombo", false);
+        animHandler.anim.SetBool("CanCombo", false);
         if (lastAttack == weapon.heavyAttack)
-            anim.PlayAnimation(weapon.heavyAttack2, true);
+            animHandler.PlayAnimation(weapon.heavyAttack2, true);
     }
 }

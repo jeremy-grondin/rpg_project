@@ -65,9 +65,8 @@ public class InputHandler : MonoBehaviour
     {
         inputActions.PlayerControls.LightAttack.performed += i => lightAttack = true;
         inputActions.PlayerControls.HeavyAttack.performed += i => heavyAttack = true;
-
-
-        //TODO factoriser ces 2 if
+        
+        //TODO refractorer ces 2 if
         if (lightAttack)
         {
             if(playerManager.canCombo)
