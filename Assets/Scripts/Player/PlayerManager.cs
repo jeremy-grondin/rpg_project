@@ -1,13 +1,16 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    InputHandler input;
-    PlayerLocomotion playerLocomotion;
     Animator anim;
+    InputHandler input;
+    Interactable interactable;
+    PlayerLocomotion playerLocomotion;
+    
+    [SerializeField] InteractableUI interactableUI;
  
-    [HideInInspector]
-    public bool isInteracting = false;
+    [HideInInspector] public bool isInteracting = false;
 
     [HideInInspector] public bool canCombo = false;
 
@@ -21,7 +24,8 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         input.UpdateInput();
-        CheckInteractable();
+        //TODO enlever de l'update, utiliser les collisionsEnter et exit
+        //CheckInteractable();
         isInteracting = anim.GetBool("IsInteracting");
         canCombo = anim.GetBool("CanCombo");
 
@@ -34,19 +38,34 @@ public class PlayerManager : MonoBehaviour
         input.ResetInput();
     }
 
-    public void CheckInteractable()
+    private void OnTriggerEnter(Collider other)
     {
-        RaycastHit hit;
-        
-        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
+        if (other.gameObject.CompareTag("Interactable"))
         {
-            if (hit.collider.CompareTag("Interactable"))
+            interactable = other.gameObject.GetComponent<Interactable>();
+            interactableUI.interactableText.text = interactable.interactalbeText;
+            interactableUI.gameObject.SetActive(true);
+        }
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            if (interactable && input.interact)
             {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                
-                if(interactable && input.interact)
-                    interactable.Interact(this);
+                interactable.Interact(this);
+                interactableUI.gameObject.SetActive(false);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            interactableUI.gameObject.SetActive(false);
+            interactable = null;
         }
     }
 }
