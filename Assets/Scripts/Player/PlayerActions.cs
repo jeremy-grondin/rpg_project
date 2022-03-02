@@ -89,6 +89,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""003eddec-fb1c-41bf-8cd6-63e6744cadde"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""NextWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49cd8b79-2d5a-434d-9a0b-b45ac2df63a2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +247,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_PlayerControls_Camera = m_PlayerControls.FindAction("Camera", throwIfNotFound: true);
         m_PlayerControls_HeavyAttack = m_PlayerControls.FindAction("HeavyAttack", throwIfNotFound: true);
         m_PlayerControls_NextWeapon = m_PlayerControls.FindAction("NextWeapon", throwIfNotFound: true);
+        m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +314,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Camera;
     private readonly InputAction m_PlayerControls_HeavyAttack;
     private readonly InputAction m_PlayerControls_NextWeapon;
+    private readonly InputAction m_PlayerControls_Interact;
     public struct PlayerControlsActions
     {
         private @PlayerActions m_Wrapper;
@@ -304,6 +326,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_PlayerControls_Camera;
         public InputAction @HeavyAttack => m_Wrapper.m_PlayerControls_HeavyAttack;
         public InputAction @NextWeapon => m_Wrapper.m_PlayerControls_NextWeapon;
+        public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -334,6 +357,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @NextWeapon.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnNextWeapon;
                 @NextWeapon.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnNextWeapon;
                 @NextWeapon.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnNextWeapon;
+                @Interact.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -359,6 +385,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @NextWeapon.started += instance.OnNextWeapon;
                 @NextWeapon.performed += instance.OnNextWeapon;
                 @NextWeapon.canceled += instance.OnNextWeapon;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -372,5 +401,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnNextWeapon(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

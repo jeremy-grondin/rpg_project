@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerInventory : MonoBehaviour
 
     [HideInInspector] public int currentWeaponRightIndex = 0;
     [HideInInspector] public int currentWeaponLeftIndex = 0;
+    
+    public List<WeaponItem> weapons = new List<WeaponItem>();
 
     private void Awake()
     {
