@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerStats : GenericCharacterStats
 {
     public static Action<int> OnLifeChange;
-
+    
     void Start()
     {
         life = maxLife;
@@ -16,4 +17,5 @@ public class PlayerStats : GenericCharacterStats
         base.TakeDamage(damage);
         OnLifeChange?.Invoke(life);
     }
+    
 }

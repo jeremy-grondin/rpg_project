@@ -14,6 +14,8 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public bool switchWeapon = false;
     [HideInInspector] public bool interact = false;
 
+    [SerializeField] private GameObject particlesHeal;
+
     PlayerActions inputActions;
     PlayerAttacks playerAttacks;
     PlayerInventory inventory;
@@ -52,6 +54,9 @@ public class InputHandler : MonoBehaviour
         AttackInput();
         SwitchWeaponInput();
         InteractInput();
+
+        if (inputActions.PlayerControls.Heal.WasPressedThisFrame())
+            Instantiate(particlesHeal, transform);
     }
 
     public void ResetInput()
@@ -92,6 +97,7 @@ public class InputHandler : MonoBehaviour
 
                 playerAttacks.HandleLightAttack(inventory.rightWeapon);
             }
+
         }
 
         if (heavyAttack)
