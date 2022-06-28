@@ -9,10 +9,13 @@ public class AnimatorHandler : MonoBehaviour
     int horizontal = 0;
     public bool canRotate;
 
+    private Transform transformPlayer;
+
     public void Initialize()
     {
         playerManager = GetComponentInParent<PlayerManager>();
         playerLocomtion = GetComponentInParent<PlayerLocomotion>();
+        transformPlayer = GetComponentInParent<Transform>();
         anim = GetComponent<Animator>();
         vertical = Animator.StringToHash("Vertical");
         horizontal = Animator.StringToHash("Horizontal");
@@ -83,5 +86,10 @@ public class AnimatorHandler : MonoBehaviour
         Vector3 pos = anim.deltaPosition;
         pos.y = 0f;
         playerLocomtion.rb.velocity = pos / Time.deltaTime;
+    }
+
+    public void AddParticles(GameObject particles)
+    {
+        Instantiate(particles, transformPlayer);
     }
 }

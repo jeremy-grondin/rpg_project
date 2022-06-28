@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd6fb4f5ad80bd4eaa4d94263890316, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 5552621ba5d70854b9fe2d9a446d66b4, type: 3}
   itemName: Shield
   modePrefab: {fileID: 5544913656902748117, guid: 345ba75e4e613684ea1ada3c897c951c, type: 3}
+  weaponDamage: 2
+  lightAttack: 
+  lightAttack2: 
+  heavyAttack: 
+  heavyAttack2: 
+  rightArmIdle: 
+  leftHandIdle: 
