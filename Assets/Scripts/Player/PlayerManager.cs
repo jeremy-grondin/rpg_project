@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class PlayerManager : MonoBehaviour
     InputHandler input;
     PlayerLocomotion playerLocomotion;
     Animator anim;
+    UIManager uiManager;
  
     [HideInInspector]
     public bool isInteracting = false;
@@ -16,14 +18,17 @@ public class PlayerManager : MonoBehaviour
         input = GetComponent<InputHandler>();
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void Update()
     {
         input.UpdateInput();
-        CheckInteractable();
         isInteracting = anim.GetBool("IsInteracting");
         canCombo = anim.GetBool("CanCombo");
+
+        if (input.inventoryFlag)
+            return;
 
         if (!isInteracting)
             playerLocomotion.MoveAndRotate();
@@ -31,21 +36,50 @@ public class PlayerManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        input.ResetInput();
+        input.lightAttack = false;
+        input.heavyAttack = false;
+        input.switchWeapon = false;
+        input.inventoryInput = false;
     }
 
-    public void CheckInteractable()
+    private void OnTriggerEnter(Collider other)
     {
-        RaycastHit hit;
-        
-        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f))
+        if (other.CompareTag("Interactable"))
         {
-            if (hit.collider.CompareTag("Interactable"))
+            Interactable interactable = other.GetComponent<Interactable>();
+            if (interactable != null)
             {
-                Interactable interactable = hit.collider.GetComponent<Interactable>();
-                
-                if(interactable && input.interact)
-                    interactable.Interact(this);
+                uiManager.interactableText.text = interactable.interactableText;
+                uiManager.interactablePanel.SetActive(true);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            Interactable interactable = other.GetComponent<Interactable>();
+
+            if (interactable != null && input.interact)
+            {
+                Debug.Log("Interact with weapon");
+                interactable.Interact(this);
+                input.interact = false;
+                uiManager.interactablePanel.SetActive(false);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Interactable"))
+        {
+            Interactable interactable = other.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                uiManager.interactableText.text = interactable.interactableText;
+                uiManager.interactablePanel.SetActive(false);
             }
         }
     }

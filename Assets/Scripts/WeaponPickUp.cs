@@ -20,7 +20,7 @@ public class WeaponPickUp : Interactable
 
         playerLocomotion.rb.velocity = Vector3.zero;
         anim.PlayAnimation("PickUp", true);
-        playerInventory.weapons.Add(weapon);
+        playerInventory.weaponInventory.Add(weapon);
         Destroy(gameObject);
     }
 }

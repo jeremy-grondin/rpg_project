@@ -49,7 +49,9 @@ public class PlayerLocomotion : MonoBehaviour
 
     private void HandleRotation()
     {
-        Vector3 targetDir = cameraTransform.forward * input.vertical;
+        Vector3 targetDir = Vector3.zero;
+
+        targetDir = cameraTransform.forward * input.vertical;
         targetDir += cameraTransform.right * input.horizontal;
 
         targetDir.Normalize();

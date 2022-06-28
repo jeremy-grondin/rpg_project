@@ -6,7 +6,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private float radius = 2.0f;
-    
+    public string interactableText;
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;

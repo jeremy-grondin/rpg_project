@@ -12,12 +12,15 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public bool heavyAttack = false;
     [HideInInspector] public bool comboFlag = false;
     [HideInInspector] public bool switchWeapon = false;
+    [HideInInspector] public bool inventoryInput = false;
+    [HideInInspector] public bool inventoryFlag = false;
     [HideInInspector] public bool interact = false;
 
     PlayerActions inputActions;
     PlayerAttacks playerAttacks;
     PlayerInventory inventory;
     PlayerManager playerManager;
+    private UIManager uiManager;
 
     Vector2 movementInput;
     Vector2 cameraInput;
@@ -27,6 +30,7 @@ public class InputHandler : MonoBehaviour
         playerAttacks = GetComponent<PlayerAttacks>();
         inventory = GetComponent<PlayerInventory>();
         playerManager = GetComponent<PlayerManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void OnEnable()
@@ -39,6 +43,8 @@ public class InputHandler : MonoBehaviour
         }
 
         inputActions.Enable();
+        inputActions.PlayerControls.LightAttack.performed += i => lightAttack = true;
+        inputActions.PlayerControls.HeavyAttack.performed += i => heavyAttack = true;
     }
 
     private void OnDisable()
@@ -50,16 +56,9 @@ public class InputHandler : MonoBehaviour
     {
         MoveInput();
         AttackInput();
-        SwitchWeaponInput();
         InteractInput();
-    }
-
-    public void ResetInput()
-    {
-        lightAttack = false;
-        heavyAttack = false;
-        switchWeapon = false;
-        interact = false;
+        SwitchWeaponInput();
+        InventoryInput();
     }
 
     private void MoveInput()
@@ -73,10 +72,7 @@ public class InputHandler : MonoBehaviour
 
     private void AttackInput()
     {
-        inputActions.PlayerControls.LightAttack.performed += i => lightAttack = true;
-        inputActions.PlayerControls.HeavyAttack.performed += i => heavyAttack = true;
-        
-        //TODO refractorer ces 2 if
+        //TODO factoriser ces 2 if
         if (lightAttack)
         {
             if(playerManager.canCombo)
@@ -117,6 +113,25 @@ public class InputHandler : MonoBehaviour
         inputActions.PlayerControls.NextWeapon.performed += i => switchWeapon = true;
         if(switchWeapon)
             inventory.ChangeWeaponRightHand();
+    }
+
+    private void InventoryInput()
+    {
+        inputActions.PlayerControls.Inventory.performed += i => inventoryInput = true;
+        if (inventoryInput)
+        {
+            inventoryFlag = !inventoryFlag;
+            if (inventoryFlag)
+            {
+                uiManager.OpenWindow();
+                uiManager.UpdateUI();
+            }
+            else
+            {
+                uiManager.CloseAllWindows();
+                uiManager.CloseWindow();
+            }
+        }
     }
 
     private void InteractInput()
