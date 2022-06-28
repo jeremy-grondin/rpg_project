@@ -12,7 +12,7 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         life = maxLife;
-        healthBar.SetMaxHealth(maxLife);
+        //healthBar.SetMaxHealth(maxLife);
         anim = GetComponentInChildren<AnimatorHandler>();
     }
 
