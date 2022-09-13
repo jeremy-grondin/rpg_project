@@ -107,6 +107,15 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""8e0d7b86-4286-4435-8c5f-57ad9f6278bf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +261,17 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7cb89406-c6c3-46bc-9bb9-4442dc5e1c9f"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +289,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         m_PlayerControls_NextWeapon = m_PlayerControls.FindAction("NextWeapon", throwIfNotFound: true);
         m_PlayerControls_Interact = m_PlayerControls.FindAction("Interact", throwIfNotFound: true);
         m_PlayerControls_Inventory = m_PlayerControls.FindAction("Inventory", throwIfNotFound: true);
+        m_PlayerControls_Heal = m_PlayerControls.FindAction("Heal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +358,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_NextWeapon;
     private readonly InputAction m_PlayerControls_Interact;
     private readonly InputAction m_PlayerControls_Inventory;
+    private readonly InputAction m_PlayerControls_Heal;
     public struct PlayerControlsActions
     {
         private @PlayerActions m_Wrapper;
@@ -350,6 +372,7 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         public InputAction @NextWeapon => m_Wrapper.m_PlayerControls_NextWeapon;
         public InputAction @Interact => m_Wrapper.m_PlayerControls_Interact;
         public InputAction @Inventory => m_Wrapper.m_PlayerControls_Inventory;
+        public InputAction @Heal => m_Wrapper.m_PlayerControls_Heal;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -386,6 +409,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnInventory;
+                @Heal.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnHeal;
+                @Heal.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnHeal;
+                @Heal.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnHeal;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -417,6 +443,9 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @Heal.started += instance.OnHeal;
+                @Heal.performed += instance.OnHeal;
+                @Heal.canceled += instance.OnHeal;
             }
         }
     }
@@ -432,5 +461,6 @@ public partial class @PlayerActions : IInputActionCollection2, IDisposable
         void OnNextWeapon(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnHeal(InputAction.CallbackContext context);
     }
 }

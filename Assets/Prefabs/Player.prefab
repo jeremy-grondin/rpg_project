@@ -121,6 +121,10 @@ MonoBehaviour:
   heavyAttack: 0
   comboFlag: 0
   switchWeapon: 0
+  inventoryInput: 0
+  inventoryFlag: 0
+  interact: 0
+  heal: 0
 --- !u!114 &5408897929409594507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03f7be0aaad68748a8f390212baf5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healAmount: 5
+  particlesHeal: {fileID: 4680702497613165830, guid: 4cb159f56969ef04a80482bfd048ac09, type: 3}
   isInteracting: 0
   canCombo: 0
 --- !u!114 &5408897929409594518
@@ -165,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 4162e5e6b9af3c44fae3f5063068ae79, type: 2}
   leftWeapon: {fileID: 11400000, guid: 5cbfb70a06bcfc34d89586ae8bbefad5, type: 2}
+  weaponInventory: []
   weaponsForRightHand:
   - {fileID: 11400000, guid: 4162e5e6b9af3c44fae3f5063068ae79, type: 2}
   - {fileID: 11400000, guid: a4a84571f55fce74daf2515785e72232, type: 2}

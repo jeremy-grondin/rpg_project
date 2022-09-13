@@ -15,6 +15,7 @@ public class InputHandler : MonoBehaviour
     [HideInInspector] public bool inventoryInput = false;
     [HideInInspector] public bool inventoryFlag = false;
     [HideInInspector] public bool interact = false;
+    [HideInInspector] public bool heal = false;
 
     PlayerActions inputActions;
     PlayerAttacks playerAttacks;
@@ -45,6 +46,7 @@ public class InputHandler : MonoBehaviour
         inputActions.Enable();
         inputActions.PlayerControls.LightAttack.performed += i => lightAttack = true;
         inputActions.PlayerControls.HeavyAttack.performed += i => heavyAttack = true;
+        inputActions.PlayerControls.Heal.performed += i => heal = true;
     }
 
     private void OnDisable()
@@ -137,5 +139,10 @@ public class InputHandler : MonoBehaviour
     private void InteractInput()
     {
         inputActions.PlayerControls.Interact.performed += i => interact = true;
+    }
+
+    private void HealInput()
+    {
+        
     }
 }

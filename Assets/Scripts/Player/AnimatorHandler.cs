@@ -25,7 +25,6 @@ public class AnimatorHandler : MonoBehaviour
     public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
     {
         float v = 0f;
-        //float h = 0f;
 
         if (verticalMovement > 0.55f)
             v = 1f;
@@ -34,20 +33,7 @@ public class AnimatorHandler : MonoBehaviour
         else
             v = 0f;
 
-
-        /*if (horizontal > 0f && horizontalMovement < 0.55f)
-            h = 0.5f;
-        else if (horizontalMovement > 0.55f)
-            h = 1f;
-        else if (horizontal < 0f && horizontalMovement < -0.55f)
-            h = -0.5f;
-        else if (horizontal < -0.55f)
-            h = -1f;
-        else
-            h = 0f;*/
-
         anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-        //anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
     }
 
     public void CanRotate()

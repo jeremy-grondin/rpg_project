@@ -7,6 +7,10 @@ public class PlayerManager : MonoBehaviour
     PlayerLocomotion playerLocomotion;
     Animator anim;
     UIManager uiManager;
+    PlayerStats playerStats;
+
+    [SerializeField] private int healAmount = 5;
+    [SerializeField] private GameObject particlesHeal;
  
     [HideInInspector]
     public bool isInteracting = false;
@@ -19,6 +23,7 @@ public class PlayerManager : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         uiManager = FindObjectOfType<UIManager>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     private void Update()
@@ -32,6 +37,9 @@ public class PlayerManager : MonoBehaviour
 
         if (!isInteracting)
             playerLocomotion.MoveAndRotate();
+
+        if (input.heal)
+            Heal();
     }
 
     private void LateUpdate()
@@ -40,6 +48,7 @@ public class PlayerManager : MonoBehaviour
         input.heavyAttack = false;
         input.switchWeapon = false;
         input.inventoryInput = false;
+        input.heal = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,5 +91,11 @@ public class PlayerManager : MonoBehaviour
                 uiManager.interactablePanel.SetActive(false);
             }
         }
+    }
+
+    private void Heal()
+    {
+        playerStats.Heal(healAmount);
+        Instantiate(particlesHeal, transform);
     }
 }

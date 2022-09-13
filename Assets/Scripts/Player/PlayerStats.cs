@@ -26,4 +26,9 @@ public class PlayerStats : MonoBehaviour
         else
             anim.PlayAnimation("TakeDamage", true);
     }
+
+    public void Heal(int healAmount)
+    {
+        Mathf.Clamp(life, life + healAmount, maxLife);
+    }
 }
